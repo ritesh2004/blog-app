@@ -1,0 +1,203 @@
+.signin{
+    display: flex;
+    flex-direction: row;
+    gap: 130px;
+    background: #272727;
+}
+.image{
+    width: 413px;
+    height: auto;
+    position: relative;
+    /* border: solid 10px black; */
+    overflow: hidden;
+    border-right: solid 3px #6EEB83;
+    margin-bottom: 20px;
+}
+.image img{
+    width: 413px;
+}
+.image span{
+    color: #FFF;
+    font-family: Lexend Deca;
+    font-size: 64px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    transform: rotate(-90deg);
+    position: absolute;
+    top: 50%;
+    right: 35%;
+}
+.group9{
+    width: 600px;
+    height: auto;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    /* border: solid 1px black; */
+}
+.group9 .form{
+    width: 600px;
+    height: 357px;
+    flex-shrink: 0;
+    display: flex;
+    display: flex;
+    flex-direction: column;
+    gap: 37px;
+    /* border: solid 1px black; */
+}
+.group9 .form .heading{
+    display: flex;
+    flex-direction: column;
+}
+.group9 .form form{
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+.group9 .form form input{
+    width: 600px;
+    height: 60px;
+    flex-shrink: 0;
+    border: 1px solid #6EEB83;
+    background: #272727;
+    padding: 20px 30px 20px 30px;
+    color: #FFF;
+    font-family: Lexend Deca;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+}
+.group9 .form form input::placeholder{
+    color: #A5A5A5;
+    font-family: Lexend Deca;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+}
+#wlc-txt{
+    color: #FFF;
+    font-family: Archivo;
+    font-size: 48px;
+    font-style: normal;
+    font-weight: bolder;
+    line-height: normal;
+}
+#sh-desc{
+    color: #A5A5A5;
+    font-family: Lexend Deca;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+}
+.group9 .form form .group10{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.group9 .form form .group10 button{
+    width: 180px;
+    height: 60px;
+    flex-shrink: 0;
+    background: #6EEB83;
+    padding: 18px 55px 18px 55px;
+    color: #000;
+    font-family: Lexend Deca;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+.group9 .form form .group10 span{
+    width: 227px;
+    color: #FFF;
+    font-family: Lexend Deca;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+#link{
+    color: #6EEB83;
+    font-family: Lexend Deca;
+    font-size: 20px;
+    font-style: none;
+    font-weight: 400;
+    line-height: normal;
+    text-decoration: none;
+}
+
+@media screen and (max-width: 768px) {
+    .signin{
+        gap: 50px;
+    }
+    .image{
+        width: 200px;
+    }
+    .group9{
+        width: 450px;
+    }
+    .group9 .form{
+        width: 450px;
+    }
+    .group9 .form form input{
+        width: 450px;
+    }
+}
+
+@media screen and (max-width: 428px) {
+    .image{
+        display: none;
+    }
+    .signin{
+        flex-direction: column;
+        height: 150vh;
+        gap: 0;
+    }
+    .group9{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: max-content;
+        width: 100%;
+    }
+    .group9 .form{
+        width: 300px;
+        background-color: #272727;
+    }
+    .group9 .form .heading{
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        margin-top: 100px;
+    }
+    .group9 .form form input{
+        width: 300px;
+        
+    }
+    .group9 .form form .group10{
+        width: 227px;
+        flex-direction: column;
+        height: auto;
+        gap: 50px;
+        background-color: #272727;
+    }
+    .group9 .form form .group10 button{
+        width: 160px;
+        height: 52.81px;
+        flex-shrink: 0;
+        color: #000;
+        font-family: Lexend Deca;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /* padding: 15px 45px 14.81px 45px; */
+    }
+}

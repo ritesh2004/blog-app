@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,200;0,400;1,500;1,800&family=Barlow:wght@200&family=Bebas+Neue&family=Climate+Crisis&family=Lexend+Deca:wght@200&family=Montserrat:wght@300;400;800&family=Noto+Sans+JP&family=Open+Sans:wght@300;400;600&family=Palette+Mosaic&family=Poppins:wght@200;300&family=Raleway:wght@200&family=Saira+Condensed:wght@100&family=Unbounded:wght@300;400&display=swap');
+
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.home{
+    width: 100%;
+    min-height: 100vh;
+    display: inline-flex;
+    padding-right: 0px;
+    align-items: center;
+    gap: 80px;
+    background: #272727;
+    position: relative;
+}
+.sidebar{
+    position: fixed;
+    top: 20px;
+}
+.section{
+    width: 61px;
+    height: 33px;
+    flex-shrink: 0;
+    color: #FFF;
+    font-family: Lexend Deca;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+}
+
+
+@media screen and (max-width: 1210px) {
+    .home{
+        gap: 50px;
+    }
+}
+@media screen and (max-width: 988px) {
+    .home{
+        gap: 20px;
+    }
+}
+@media screen and (max-width: 815px) {
+    .home{
+        gap: 50px;
+    }
+}
+@media screen and (max-width: 700px) {
+    .home{
+        gap: 20px;
+    }
+}
+@media screen and (max-width: 428px) {
+    .section{
+        color: #FFF;
+        font-family: Lexend Deca;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        margin-top: 50px;
+        margin-bottom: 0px;
+        width: 100%;
+    }
+    .home{
+        display: flex;
+        flex-direction: column-reverse;
+        gap: 0px;
+    }
+    .sidebar{
+        top: 80%;
+        left: calc((95% - 342px)/2);
+        z-index: +1;
+    }
+}

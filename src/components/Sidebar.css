@@ -1,0 +1,100 @@
+.sidebar{
+    width: 95px;
+    height: 730px;
+    flex-shrink: 0;
+    border: 1px solid #6EEB83;
+    background: rgba(217, 217, 217, 0.00);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+.dp{
+    width: 66px;
+    height: 66px;
+    flex-shrink: 0;
+    fill: #6EEB83;
+    position: relative;
+}
+.dp svg{
+    width: 66px;
+    height: 66px;
+}
+.dp span{
+    position: absolute;
+    bottom: 50%;
+    top: 20%;
+    left: 35%;
+    color: #000;
+    font-family: Lexend Deca;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+.search{
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+}
+.search span{
+    color: #FFF;
+    font-family: Lexend Deca;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal; 
+}
+.create-icon{
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+}
+.create-icon span{
+    color: #FFF;
+    font-family: Lexend Deca;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+@media screen and (max-width: 428px) {
+    .sidebar{
+        width: 372px;
+        height: 67px;
+        /* flex-shrink: 0; */
+        border: 1px solid #6EEB83;
+        background: #272727;
+        flex-direction: row;
+    }
+    .text{
+        display: none;
+    }
+    .dp{
+        width: 40px;
+        height: 40px;
+        flex-shrink: 0;
+    }
+    .dp svg{
+        width: 40px;
+        height: 40px;
+    }
+    .dp span{
+        width: 12.121px;
+        height: 24.242px;
+        flex-shrink: 0; 
+        color: #000;
+        font-family: Lexend Deca;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;      
+    }
+}
+
+@media screen and (max-width: 415px) {
+    .sidebar{
+        width: 360px;
+    }
+}
