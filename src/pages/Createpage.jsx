@@ -15,8 +15,10 @@ function Createpage() {
   const [content,setContent] = useState("")
   const [tag,setTag] = useState("")
   const [err,setErr] = useState(false)
-
-  let [username,_] = user?.email?.split('@')
+  let [username,_] = []
+  if (user) { 
+    [username,_] = user?.email?.split('@')
+  }
   console.log(user)
   console.log(username)
   const postBlog = async(e)=>{
