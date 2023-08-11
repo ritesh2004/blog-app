@@ -64,7 +64,7 @@ function Signup() {
       </Modal>
             <div className="image">
                 <img src={image} alt="" />
-                <span>Signin</span>
+                <span>Signup</span>
             </div>
             <div className="group9">
                 <div className="form">
