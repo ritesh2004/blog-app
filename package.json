@@ -8,6 +8,7 @@
     "@mui/icons-material": "^5.14.3",
     "@mui/material": "^5.14.3",
     "@supabase/auth-ui-react": "^0.4.2",
+    "@supabase/gotrue-js": "^2.46.1",
     "@supabase/supabase-js": "^2.32.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
