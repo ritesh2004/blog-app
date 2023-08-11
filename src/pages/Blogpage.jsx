@@ -1,33 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import './Blogpage.css';
 import { Typography } from '@mui/material';
 import Footer from '../components/Footer';
-import { useParams } from 'react-router-dom';
-import { createClient } from '@supabase/supabase-js';
 
-const supabase = createClient('https://ihexfffiwujwxafykxlf.supabase.co','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImloZXhmZmZpd3Vqd3hhZnlreGxmIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTE2NzMzMjQsImV4cCI6MjAwNzI0OTMyNH0.-E9ZNWR4I2WXP4PaX7lVYGNAEC_Z2nRFq4jZjfQNvMg');
 
-function Blogpage() {
-  const {id} = useParams()
-  const [blog,setBlog] = useState([])
-  // console.log(id)
-  const getBlog = async()=>{
-    let { data: blogs, error } = await supabase
-      .from('blogs')
-      .select('*')
-      .eq('id',id)
-      .maybeSingle()
-    // console.log(blogs)
-    setBlog(blogs)
-    }
-  
-  useEffect(()=>{
-    getBlog()
-  },[])
+function Blogpage(props) {
 
-  let date = new Date(blog.created_at).getDate()
-  let month = new Date(blog.created_at).getMonth()+1;
-  let year = new Date(blog.created_at).getFullYear();
+  let date = new Date(props.selected?.created_at).getDate()
+  let month = new Date(props.selected?.created_at).getMonth()+1;
+  let year = new Date(props.selected?.created_at).getFullYear();
   let monthName = "";
   if(month===1){
       monthName = "Jan"
@@ -72,15 +53,15 @@ function Blogpage() {
     <div className="blogpage">
       <div className="blog-con">
         <Typography className='typo'>
-          {blog?.heading}
+          {props.selected?.heading}
         </Typography>
         <div className="author">
-          <span>written by @{blog?.username}</span>
+          <span>written by @{props.selected?.username}</span>
           <span>on {date} {monthName} {year}</span>
         </div>
         <div className="blog-content">
-          <span style={{color:'#FFF',fontSize:'64px',fontWeight:'400'}}>{blog?.content?.slice(0,1)}</span>
-          {blog?.content?.slice(1)}
+          <span style={{color:'#FFF',fontSize:'64px',fontWeight:'400'}}>{props.selected?.content?.slice(0,1)}</span>
+          {props.selected?.content?.slice(1)}
         </div>
       </div>
     </div>

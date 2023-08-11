@@ -1,7 +1,8 @@
 import React, { createContext, useEffect, useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
 // import { Auth } from '@supabase/auth-ui-react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import Blogpage from '../pages/Blogpage';
 
 
 const supabase = createClient('https://ihexfffiwujwxafykxlf.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImloZXhmZmZpd3Vqd3hhZnlreGxmIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTE2NzMzMjQsImV4cCI6MjAwNzI0OTMyNH0.-E9ZNWR4I2WXP4PaX7lVYGNAEC_Z2nRFq4jZjfQNvMg');
@@ -10,9 +11,30 @@ const Authcontext = createContext();
 
 export default Authcontext
 
+const SelectedBlog = () =>{
+    const {id} = useParams()
+    const [selected,setSelected] = useState([]);
+    const getBlog = async()=>{
+    let { data: blogs, error } = await supabase
+      .from('blogs')
+      .select('*')
+      .eq('id',id)
+      .maybeSingle()
+    // console.log(blogs)
+    setSelected(blogs)
+    }
+    useEffect(()=>{
+        getBlog()
+    },[])
+
+    return(
+        <Blogpage selected={selected}/>
+    )
+}
+
 const Authprovider = ({ children }) => {
 
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
@@ -22,16 +44,20 @@ const Authprovider = ({ children }) => {
     const [isLoading, setIsLoading] = useState(false)
     const [isSent,setIsSent] = useState(false)
 
+    const [allBlogs,setAllBlogs] = useState([]);
+
     const [user, setUser] = useState("");
+    const {id} = useParams()
+    console.log(id)
 
-    // useEffect(() => {
-    //     const getUserinfo = async () => {
-    //         const { data: { user } } = await supabase.auth.getUser()
-    //         setUser(user)
-    //     }
+    useEffect(() => {
+        const getUserinfo = async () => {
+            const { data: { user } } = await supabase.auth.getUser()
+            setUser(user)
+        }
 
-    //     return () => getUserinfo()
-    // }, [])
+        return () => getUserinfo()
+    }, [])
 
     console.log("From authcontext", user)
 
@@ -90,13 +116,48 @@ const Authprovider = ({ children }) => {
     const TPsign = async () => {
 
         let { data, error } = await supabase.auth.signInWithOAuth({
-            provider: 'google'
+             provider: 'google'
         })
 
-        // const { data: { user } } = await supabase.auth.getUser()
+        const { data: { user } } = await supabase.auth.getUser()
         setUser(user)
         // console.log(data)
     }
+
+    const getContent = async()=>{
+        setIsLoading(true)
+        let { data: blogs, error } = await supabase
+        .from('blogs')
+        .select('*')
+        // console.log(blogs)
+        setAllBlogs(blogs?.reverse())
+        setIsLoading(false)
+        if (error) {
+            alert("Something went wrong! Check your connectivity")
+        }
+    }
+
+    const postBlog = async(e)=>{
+        let [username,_] = []
+        if (user) { 
+            [username,_] = user?.email?.split('@')
+        }
+    e.preventDefault()
+    const { data, error } = await supabase
+      .from('blogs')
+      .insert([
+        { heading: e.target.heading.value, content: e.target.content.value, username:username,tags:e.target.tag.value },
+      ])
+      .select()
+    if (error) {
+      console.log(error)
+      alert("Something went wrong! Check your connectivity")
+      setErr(true)
+    }else{
+      navigate('/')
+    }
+  }
+
 
     let values = {
         signup: signup,
@@ -107,7 +168,10 @@ const Authprovider = ({ children }) => {
         err: err,
         errSignup: errSignup,
         isLoading: isLoading,
-        isSent:isSent
+        isSent:isSent,
+        allBlogs:allBlogs,
+        getContent:getContent,
+        postBlog:postBlog
     }
 
     return (
@@ -117,4 +181,4 @@ const Authprovider = ({ children }) => {
     )
 }
 
-export { Authprovider };
+export { Authprovider,SelectedBlog };

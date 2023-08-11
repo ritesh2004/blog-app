@@ -1,48 +1,37 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import './Home.css';
 import Sidebar from "../components/Sidebar";
 import Group from "../components/Group";
-import { Link } from "@mui/material";
 import Footer from "../components/Footer";
 import Authcontext from "../context/Authcontext";
-import { createClient } from '@supabase/supabase-js';
 import { useNavigate } from "react-router-dom";
 import CircularProgress from '@mui/material/CircularProgress';
 
-const supabase = createClient('https://ihexfffiwujwxafykxlf.supabase.co','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImloZXhmZmZpd3Vqd3hhZnlreGxmIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTE2NzMzMjQsImV4cCI6MjAwNzI0OTMyNH0.-E9ZNWR4I2WXP4PaX7lVYGNAEC_Z2nRFq4jZjfQNvMg');
 
 
 const Home = () => {
-    let {user} = useContext(Authcontext)
-    const [blogs,setBlogs] = useState([])
+    let {getContent,allBlogs} = useContext(Authcontext)
+    // const [blogs,setBlogs] = useState([])
     const [isLoading,setIsLoading] = useState(false)
     // console.log(user)
     const navigate = useNavigate()
-    const getContent = async()=>{
-        setIsLoading(true)
-        let { data: blogs, error } = await supabase
-        .from('blogs')
-        .select('*')
-        // console.log(blogs)
-        setBlogs(blogs?.reverse())
-        setIsLoading(false)
-        if (error) {
-            alert("Something went wrong! Check your connectivity")
-        }
-    }
+    
     useEffect(()=>{
+        setIsLoading(true)
         getContent()
+        setIsLoading(false)
     },[])
     return (
         <>
         <div className="home">
-            <Sidebar className='sidebar' data={blogs} />
+            <Sidebar className='sidebar' data={allBlogs} />
+            {isLoading?<CircularProgress color="success"/>:<span></span>}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '90px',height:'auto',marginBottom:'50px' }}>
                 <div className="section">
                     <div id='latest'></div>
                     Latest
                 </div>
-                {blogs?.map((content)=>{
+                {allBlogs?.map((content)=>{
                     let date = new Date(content.created_at).getDate()
                     let month = new Date(content.created_at).getMonth()+1;
                     let monthName = "";

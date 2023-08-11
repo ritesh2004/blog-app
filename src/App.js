@@ -5,7 +5,7 @@ import Signin from './pages/Signin';
 import Signup from './pages/Signup';
 import Blogpage from './pages/Blogpage';
 import Createpage from './pages/Createpage';
-import { Authprovider } from './context/Authcontext';
+import { Authprovider, SelectedBlog } from './context/Authcontext';
 import Privateroute from './utils/Privateroute';
 
 // Database Password = XAkXXPhaUMVkDrpI
@@ -20,7 +20,7 @@ function App() {
       <Route path='/signin' Component={Signin}/>
       <Route path='/signup' Component={Signup}/>
       {/* <Route Component={Privateroute}> */}
-        <Route path='/page/:id/' element={<Privateroute Component={Blogpage}/>}/>
+        <Route path='/page/:id/' element={<Privateroute Component={SelectedBlog}/>}/>
         <Route path='/create' element={<Privateroute Component={Createpage}/>}/>
       {/* </Route> */}
     </Routes>
