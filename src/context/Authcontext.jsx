@@ -33,7 +33,7 @@ const Authprovider = ({ children }) => {
         return () => getUserinfo()
     }, [])
 
-    // console.log("From authcontext", user)
+    console.log("From authcontext", user)
 
     const signup = async (e) => {
         e.preventDefault()
