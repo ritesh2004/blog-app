@@ -24,14 +24,14 @@ const Authprovider = ({ children }) => {
 
     const [user, setUser] = useState("");
 
-    useEffect(() => {
-        const getUserinfo = async () => {
-            const { data: { user } } = await supabase.auth.getUser()
-            setUser(user)
-        }
+    // useEffect(() => {
+    //     const getUserinfo = async () => {
+    //         const { data: { user } } = await supabase.auth.getUser()
+    //         setUser(user)
+    //     }
 
-        return () => getUserinfo()
-    }, [])
+    //     return () => getUserinfo()
+    // }, [])
 
     console.log("From authcontext", user)
 
@@ -48,7 +48,7 @@ const Authprovider = ({ children }) => {
         if (!error) {
             setErrSignup(false)
             // console.log("Looking smooth")
-            // const { data: { user } } = await supabase.auth.getUser()
+            const { data: { user } } = await supabase.auth.getUser()
             setUser(user)
             setIsSent(true)
         } else {
@@ -69,7 +69,7 @@ const Authprovider = ({ children }) => {
         setIsLoading(false)
         if (!error) {
             setErr(false)
-            // const { data: { user } } = await supabase.auth.getUser()
+            const { data: { user } } = await supabase.auth.getUser()
             setUser(user)
             navigate('/')
         }
@@ -82,7 +82,7 @@ const Authprovider = ({ children }) => {
         // console.log("Clicked")
         let { error } = await supabase.auth.signOut()
         if (error) {
-            // console.log("Something went wrong!")
+            console.log("Something went wrong!")
         }
         setUser("")
     }
@@ -93,7 +93,7 @@ const Authprovider = ({ children }) => {
             provider: 'google'
         })
 
-        // const { data: { user } } = await supabase.auth.getUser()
+        const { data: { user } } = await supabase.auth.getUser()
         setUser(user)
         // console.log(data)
     }
