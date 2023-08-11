@@ -1,6 +1,7 @@
 .group{
     width: 990px;
     height: auto;
+    cursor: pointer;
 }
 
 .feed-desktop{
@@ -20,7 +21,7 @@
 }
 .feed-desktop-con .group1{
     width: 920px;
-    height: auto;
+    height: min-content;
     flex-shrink: 0;
 }
 .feed-desktop-con .group1 .heading{
@@ -46,10 +47,10 @@
 }
 .feed-desktop-con .group3{
     width: 73px;
-    height: 225px;
+    height: 200px;
     display: flex;
     flex-direction: column;
-    gap: 90px;
+    justify-content: space-between;
 }
 .feed-desktop-con .group3 .date{
     width: 73px;

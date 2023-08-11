@@ -1,0 +1,111 @@
+.createpage{
+    width: 100%;
+    min-height: 100vh;
+    background: #272727;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.createpage .create-con{
+    width: 800px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+.createpage .create-con .typ{
+    color: #FFF;
+    text-align: center;
+    font-family: Archivo;
+    font-size: 48px;
+    font-style: normal;
+    font-weight: bolder;
+    line-height: normal;
+}
+.createpage .create-con span{
+    color: #A5A5A5;
+    text-align: center;
+    font-family: Lexend Deca;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+}
+.createpage .create-con form{
+    width: 800px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 40px;
+}
+.createpage .create-con form input{
+    width: 100%;
+    height: 60px;
+    background: transparent;
+    border: 1px solid #6EEB83;
+    outline: none;
+    padding-left: 20px;
+    font-family: Lexend Deca;
+    color: white;
+    font-size: 22px;
+}
+.createpage .create-con form textarea{
+    width: 100%;
+    background: transparent;
+    border: 1px solid #6EEB83;
+    outline: none;
+    padding-left: 20px;
+    padding-top: 10px;
+    font-family: Lexend Deca;
+    color: white;
+    font-size: 22px;
+}
+.createpage .create-con form button{
+    height: 40px;
+    background: #6EEB83;
+    border-radius: 4px;
+    color: #000;
+    font-family: Lexend Deca;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    cursor: pointer;
+}
+.createpage .create-con form input::placeholder{
+    color: #A5A5A5;
+    font-family: Lexend Deca;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+}
+
+.createpage .create-con form textarea::placeholder{
+    color: #A5A5A5;
+    font-family: Lexend Deca;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+}
+
+@media screen and (max-width: 814px) {
+    .createpage .create-con{
+        width: 600px;
+    }
+    .createpage .create-con form{
+        width: 600px;
+    }
+}
+@media screen and (max-width: 605px) {
+    .createpage .create-con{
+        width: 300px;
+    }
+    .createpage .create-con form{
+        width: 300px;
+    }
+}

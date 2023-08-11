@@ -1,3 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,200;0,400;1,500;1,800&family=Barlow:wght@200&family=Bebas+Neue&family=Climate+Crisis&family=Lexend+Deca:wght@200;600&family=Montserrat:wght@300;400;800&family=Noto+Sans+JP&family=Open+Sans:wght@300;400;600&family=Palette+Mosaic&family=Poppins:wght@200;300&family=Raleway:wght@200&family=Saira+Condensed:wght@100&family=Unbounded:wght@300;400&display=swap');
 
-
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}

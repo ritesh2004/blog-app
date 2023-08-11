@@ -1,16 +1,24 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './Sidebar.css';
+import { useNavigate } from 'react-router-dom';
+import LogoutIcon from '@mui/icons-material/Logout';
+import { Button } from '@mui/material';
+import Authcontext from '../context/Authcontext';
 
 function Sidebar() {
+    const navigate = useNavigate();
+    let {logout,user} = useContext(Authcontext)
     return (
         <div style={{ width: '95px', height: '730px' }}>
             <div className="sidebar">
-                <div className="dp">
+                {user?<div className="dp">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 66 66" fill="none">
                         <circle cx="33" cy="33" r="33" fill="#6EEB83" />
                     </svg>
-                    <span>S</span>
-                </div>
+                    <span style={{textTransform:'capitalize'}}>{user?.email[0]}</span>
+                </div>:<div>
+                    <Button variant='contained' color='success' onClick={()=>navigate('/signin')}>login</Button>
+                </div>}
                 <div className="search">
                     <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
                         <mask id="mask0_17_195" style={{ maskType: 'alpha' }} maskUnits="userSpaceOnUse" x="0" y="0" width="40" height="40">
@@ -22,7 +30,7 @@ function Sidebar() {
                     </svg>
                     <span className='text'>search</span>
                 </div>
-                <div className="create-icon">
+                <div className="create-icon" onClick={()=>navigate('/create')}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
                         <mask id="mask0_2_120" style={{ maskType: 'alpha' }} maskUnits="userSpaceOnUse" x="0" y="0" width="40" height="40">
                             <rect width="40" height="40" fill="#D9D9D9" />
@@ -33,6 +41,9 @@ function Sidebar() {
                     </svg>
                     <span className='text'>create</span>
                 </div>
+                {user?<div className='logout'>
+                    <Button variant="contained" color='error' onClick={logout}><LogoutIcon/></Button>
+                </div>:<></>}
             </div>
         </div>
     )
