@@ -1,25 +1,87 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './Sidebar.css';
 import { useNavigate } from 'react-router-dom';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { Button } from '@mui/material';
 import Authcontext from '../context/Authcontext';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
+import SearchIcon from '@mui/icons-material/Search';
+import Group from './Group';
 
-function Sidebar() {
+const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 500,
+    bgcolor: '#272727',
+    border: 'none',
+    borderRadius:'8px',
+    boxShadow: 24,
+    p: 4,
+    display:'flex',
+    gap:'10px'
+};
+
+function Sidebar(props) {
     const navigate = useNavigate();
-    let {logout,user} = useContext(Authcontext)
+    const [text,setText] = useState("");
+
+    const [data,setData] = useState([]);
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+
+    useEffect(()=>{
+        setData(props?.data)
+    },[props])
+
+    const handleSearch = () =>{
+        return (
+            data.filter((blog)=>(
+                blog?.heading.includes(text) || blog?.content.includes(text) || blog?.tags.includes(text)
+            ))
+        )
+    }
+
+    let { logout, user } = useContext(Authcontext)
     return (
         <div style={{ width: '95px', height: '730px' }}>
+            <Modal
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+            >
+                <div id='modal-box'>
+                <div style={{display:'flex',gap:'5px'}}>
+                    <input type='text' id='search-ip' name='search' placeholder='Search...' onChange={e=>setText(e.target.value)} value={text} />
+                    <Button variant='outlined' color='success' onClick={handleSearch}><SearchIcon/></Button>
+                    </div>
+                    <br/>
+                    {text?
+                    handleSearch().map((blog)=>{
+                        return(
+                            <div id='search-result' onClick={()=>navigate(`page/${blog.id}/`)}>
+                                {blog?.heading}
+                            </div>
+                        )
+                    }):<span></span>
+                    }
+                </div>
+            </Modal>
             <div className="sidebar">
-                {user?<div className="dp">
+                {user ? <div className="dp">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 66 66" fill="none">
                         <circle cx="33" cy="33" r="33" fill="#6EEB83" />
                     </svg>
-                    <span style={{textTransform:'capitalize'}}>{user?.email[0]}</span>
-                </div>:<div>
-                    <Button variant='contained' color='success' onClick={()=>navigate('/signin')}>login</Button>
+                    <span style={{ textTransform: 'capitalize' }}>{user?.email[0]}</span>
+                </div> : <div>
+                    <Button variant='contained' color='success' onClick={() => navigate('/signin')}>login</Button>
                 </div>}
-                <div className="search">
+                <div className="search" onClick={handleOpen}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
                         <mask id="mask0_17_195" style={{ maskType: 'alpha' }} maskUnits="userSpaceOnUse" x="0" y="0" width="40" height="40">
                             <rect width="40" height="40" fill="#D9D9D9" />
@@ -30,7 +92,7 @@ function Sidebar() {
                     </svg>
                     <span className='text'>search</span>
                 </div>
-                <div className="create-icon" onClick={()=>navigate('/create')}>
+                <div className="create-icon" onClick={() => navigate('/create')}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
                         <mask id="mask0_2_120" style={{ maskType: 'alpha' }} maskUnits="userSpaceOnUse" x="0" y="0" width="40" height="40">
                             <rect width="40" height="40" fill="#D9D9D9" />
@@ -41,9 +103,9 @@ function Sidebar() {
                     </svg>
                     <span className='text'>create</span>
                 </div>
-                {user?<div className='logout'>
-                    <Button variant="contained" color='error' onClick={logout}><LogoutIcon/></Button>
-                </div>:<></>}
+                {user ? <div className='logout'>
+                    <Button variant="contained" color='error' onClick={logout}><LogoutIcon /></Button>
+                </div> : <></>}
             </div>
         </div>
     )

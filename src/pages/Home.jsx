@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import './Home.css';
 import Sidebar from "../components/Sidebar";
 import Group from "../components/Group";
@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import CircularProgress from '@mui/material/CircularProgress';
 
 const supabase = createClient('https://ihexfffiwujwxafykxlf.supabase.co','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImloZXhmZmZpd3Vqd3hhZnlreGxmIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTE2NzMzMjQsImV4cCI6MjAwNzI0OTMyNH0.-E9ZNWR4I2WXP4PaX7lVYGNAEC_Z2nRFq4jZjfQNvMg');
+
 
 const Home = () => {
     let {user} = useContext(Authcontext)
@@ -35,7 +36,7 @@ const Home = () => {
     return (
         <>
         <div className="home">
-            <Sidebar className='sidebar' />
+            <Sidebar className='sidebar' data={blogs} />
             <div style={{ display: 'flex', flexDirection: 'column', gap: '90px',height:'auto',marginBottom:'50px' }}>
                 <div className="section">
                     <div id='latest'></div>
