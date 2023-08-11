@@ -84,7 +84,7 @@ const Home = () => {
                         <Group
                             username = {content.username}
                             heading = {content.heading}
-                            content = {content.content}
+                            content = {content.content?.slice(0,400)}
                             date = {date}
                             monthname = {monthName}
                             tags = {content.tags}
