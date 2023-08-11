@@ -77,7 +77,6 @@ const Authprovider = ({ children }) => {
             const { data: { user } } = await supabase.auth.getUser()
             setUser(user)
             setIsSent(true)
-            navigate('/signin')
         } else {
             // console.log(error)
             setErrSignup(true)
