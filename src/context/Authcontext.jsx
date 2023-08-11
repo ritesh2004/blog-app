@@ -121,7 +121,7 @@ const Authprovider = ({ children }) => {
 
         const { data: { user } } = await supabase.auth.getUser()
         setUser(user)
-        // console.log(data)
+        console.log("Error in Third party Auth",error)
     }
 
     const getContent = async()=>{
