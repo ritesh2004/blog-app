@@ -21,6 +21,9 @@ const Home = () => {
         .select('*')
         console.log(blogs)
         setBlogs(blogs?.reverse())
+        if (error) {
+            alert("Something went wrong! Check your connectivity")
+        }
     }
     useEffect(()=>{
         getContent()

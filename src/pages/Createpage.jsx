@@ -29,6 +29,7 @@ function Createpage() {
       .select()
     if (error) {
       console.log(error)
+      alert("Something went wrong! Check your connectivity")
       setErr(true)
     }else{
       navigate('/')
