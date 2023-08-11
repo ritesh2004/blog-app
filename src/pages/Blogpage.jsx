@@ -10,14 +10,14 @@ const supabase = createClient('https://ihexfffiwujwxafykxlf.supabase.co','eyJhbG
 function Blogpage() {
   const {id} = useParams()
   const [blog,setBlog] = useState([])
-  console.log(id)
+  // console.log(id)
   const getBlog = async()=>{
     let { data: blogs, error } = await supabase
       .from('blogs')
       .select('*')
       .eq('id',id)
       .maybeSingle()
-    console.log(blogs)
+    // console.log(blogs)
     setBlog(blogs)
     }
   

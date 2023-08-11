@@ -33,7 +33,7 @@ const Authprovider = ({ children }) => {
         return () => getUserinfo()
     }, [])
 
-    console.log("From authcontext", user)
+    // console.log("From authcontext", user)
 
     const signup = async (e) => {
         e.preventDefault()
@@ -47,12 +47,12 @@ const Authprovider = ({ children }) => {
         setIsLoading(false)
         if (!error) {
             setErrSignup(false)
-            console.log("Looking smooth")
+            // console.log("Looking smooth")
             const { data: { user } } = await supabase.auth.getUser()
             setUser(user)
             setIsSent(true)
         } else {
-            console.log(error)
+            // console.log(error)
             setErrSignup(true)
         }
     }
@@ -82,7 +82,7 @@ const Authprovider = ({ children }) => {
         // console.log("Clicked")
         let { error } = await supabase.auth.signOut()
         if (error) {
-            console.log("Something went wrong!")
+            // console.log("Something went wrong!")
         }
         setUser("")
     }
@@ -95,7 +95,7 @@ const Authprovider = ({ children }) => {
 
         const { data: { user } } = await supabase.auth.getUser()
         setUser(user)
-        console.log(data)
+        // console.log(data)
     }
 
     let values = {

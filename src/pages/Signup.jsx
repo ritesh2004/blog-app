@@ -44,7 +44,7 @@ function Signup() {
         }
     },[isSent])
 
-    console.log(isSent)
+    // console.log(isSent)
     return (
         <div className="signin">
         <Modal

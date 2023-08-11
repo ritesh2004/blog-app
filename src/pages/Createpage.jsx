@@ -19,8 +19,8 @@ function Createpage() {
   if (user) { 
     [username,_] = user?.email?.split('@')
   }
-  console.log(user)
-  console.log(username)
+  // console.log(user)
+  // console.log(username)
   const postBlog = async(e)=>{
     e.preventDefault()
     const { data, error } = await supabase

@@ -7,20 +7,24 @@ import Footer from "../components/Footer";
 import Authcontext from "../context/Authcontext";
 import { createClient } from '@supabase/supabase-js';
 import { useNavigate } from "react-router-dom";
+import CircularProgress from '@mui/material/CircularProgress';
 
 const supabase = createClient('https://ihexfffiwujwxafykxlf.supabase.co','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImloZXhmZmZpd3Vqd3hhZnlreGxmIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTE2NzMzMjQsImV4cCI6MjAwNzI0OTMyNH0.-E9ZNWR4I2WXP4PaX7lVYGNAEC_Z2nRFq4jZjfQNvMg');
 
 const Home = () => {
     let {user} = useContext(Authcontext)
     const [blogs,setBlogs] = useState([])
-    console.log(user)
+    const [isLoading,setIsLoading] = useState(false)
+    // console.log(user)
     const navigate = useNavigate()
     const getContent = async()=>{
+        setIsLoading(true)
         let { data: blogs, error } = await supabase
         .from('blogs')
         .select('*')
-        console.log(blogs)
+        // console.log(blogs)
         setBlogs(blogs?.reverse())
+        setIsLoading(false)
         if (error) {
             alert("Something went wrong! Check your connectivity")
         }
@@ -81,6 +85,7 @@ const Home = () => {
                     }
                     return(
                         <div onClick={()=>navigate(`page/${content.id}/`)}>
+                        {isLoading?<CircularProgress color="success"/>:<span></span>}
                         <Group
                             username = {content.username}
                             heading = {content.heading}
