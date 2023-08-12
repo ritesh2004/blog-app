@@ -77,7 +77,7 @@ function Signup() {
                         <input type="password" name="password" onChange={handleForm} value={form.password} placeholder='Enter your password' />
                         {errSignup?<span style={{color:'red',fontSize:'large'}}>Something went wrong! Check Credentials</span>:<span></span>}
                         <div className="group10">
-                            <button type='submit' style={isLoading?{backgroundColor:'gray',cursor:'not-allowed'}:{backgroundColor:'#6EEB83'}}>SIGNUP</button>
+                            <button type='submit' style={isLoading?{backgroundColor:'gray',cursor:'not-allowed'}:{backgroundColor:'#6EEB83'}} disabled={isLoading}>SIGNUP</button>
                             <span>
                                 already have an account?
                                 <Link id='link' to={'/signin'}> sign-in</Link>

@@ -28,7 +28,7 @@ function Signin() {
                         <input type="password" name="password" onChange={(e)=>setPassword(e.target.value)} value={password}  placeholder='Enter your password' />
                         {err?<span style={{color:'red',fontSize:'large'}}>Something went wrong! Check Credentials</span>:<span></span>}
                         <div className="group10">
-                            <button type='submit' style={isLoading?{backgroundColor:'grey',cursor:"not-allowed"}:{backgroundColor:'#6EEB83'}}>LOGIN</button>
+                            <button type='submit' style={isLoading?{backgroundColor:'grey',cursor:"not-allowed"}:{backgroundColor:'#6EEB83'}} disabled={isLoading}>LOGIN</button>
                             <span>
                                 don’t have an account?
                                 <Link id='link' to={'/signup'}> sign-up</Link>

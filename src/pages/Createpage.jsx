@@ -5,7 +5,7 @@ import Footer from '../components/Footer';
 import Authcontext from '../context/Authcontext';
 
 function Createpage() {
-  let {postBlog} = useContext(Authcontext)
+  let {postBlog,isUploading} = useContext(Authcontext)
   const [heading,setheading] = useState("")
   const [content,setContent] = useState("")
   const [tag,setTag] = useState("")
@@ -25,7 +25,7 @@ function Createpage() {
                 <input type="text" name='heading' onChange={(e)=>setheading(e.target.value)} value={heading} placeholder="Enter your blog's heading"/>
                 <textarea name="content" cols="30" rows="10" onChange={(e)=>setContent(e.target.value)} value={content} placeholder='Type content here...'/>
                 <input type="text" name='tag' onChange={(e)=>setTag(e.target.value)} value={tag} placeholder="Tags e.g.#tag1,#tag2"/>
-                <button type='submit'>SHARE</button>
+                <button type='submit' style={isUploading?{backgroundColor:'gray',cursor:'not-allowed'}:{backgroundColor:'#6EEB83'}} disabled={isUploading}>SHARE</button>
             </form>
             {/* {!err?<Snack cmd="open" text="Shared Successfully" />:<span></span>} */}
         </div>

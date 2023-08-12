@@ -206,7 +206,7 @@
     .feed-desktop-con .group3{
         width: 342px;
         height: auto;
-        flex-direction: row;
+        flex-direction: row-reverse;
         display: flex;
         justify-content: space-between;
         position: absolute;

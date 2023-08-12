@@ -42,6 +42,7 @@ const Authprovider = ({ children }) => {
     const [err, setErr] = useState(false);
     const [errSignup, setErrSignup] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
+    const [isUploading,setIsUploading] = useState(false)
     const [isSent,setIsSent] = useState(false)
 
     const [allBlogs,setAllBlogs] = useState([]);
@@ -138,17 +139,19 @@ const Authprovider = ({ children }) => {
     }
 
     const postBlog = async(e)=>{
-        let [username,_] = []
-        if (user) { 
-            [username,_] = user?.email?.split('@')
-        }
+    let [username,_] = []
+    if (user) { 
+        [username,_] = user?.email?.split('@')
+    }
     e.preventDefault()
+    setIsUploading(true)
     const { data, error } = await supabase
       .from('blogs')
       .insert([
         { heading: e.target.heading.value, content: e.target.content.value, username:username,tags:e.target.tag.value },
       ])
       .select()
+    setIsUploading(false)
     if (error) {
       console.log(error)
       alert("Something went wrong! Check your connectivity")
@@ -171,7 +174,8 @@ const Authprovider = ({ children }) => {
         isSent:isSent,
         allBlogs:allBlogs,
         getContent:getContent,
-        postBlog:postBlog
+        postBlog:postBlog,
+        isUploading:isUploading
     }
 
     return (
