@@ -14,6 +14,26 @@
     min-height: 706px;
     flex-shrink: 0;
 }
+#edit-delete-op{
+    min-height: auto;
+    position: absolute;
+    top: 35%;
+    right: 10%;
+}
+#edit-icon{
+    color: #A5A5A5;
+    cursor: pointer;
+}
+#delete-icon{
+    color: rgba(255, 0, 0, 0.5);
+    cursor: pointer;
+}
+#edit-icon:hover{
+    color: #FFF;
+}
+#delete-icon:hover{
+    color: red;
+}
 .blog-con .typo{
     color: #6EEB83;
     font-family: Archivo;
@@ -60,7 +80,7 @@
     }
     .blog-con{
         width: 330px;
-        min-height: 1094px;
+        min-height: 800px;
     }
     .blog-con .typo{
         color: #6EEB83;
@@ -87,5 +107,12 @@
         font-weight: 400;
         line-height: normal;
         /* margin-top: 115px; */
+    }
+    #edit-delete-op{
+        position: absolute;
+        flex-direction: row-reverse;
+        height: 100px !important;
+        top: 35%;
+        right: 10%;
     }
 }

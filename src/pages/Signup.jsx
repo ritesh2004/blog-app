@@ -84,8 +84,8 @@ function Signup() {
                             </span>
                         </div>
                     </form>
-                    {/* <Typography variant='h5' sx={{fontFamily:'Montserrat',color:'#FFF'}}>Or,</Typography> */}
-                {/* <button id='google' onClick={TPsign}>Google</button> */}
+                    {/* <Typography variant='h5' sx={{fontFamily:'Montserrat',color:'#FFF'}}>Or,</Typography>
+                <button id='google' onClick={TPsign}>Google</button> */}
                 </div>
             </div>
         </div>

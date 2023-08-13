@@ -12,8 +12,11 @@ const Authcontext = createContext();
 export default Authcontext
 
 const SelectedBlog = () =>{
+    const navigate = useNavigate()
+    let userDet = {}
     const {id} = useParams()
     const [selected,setSelected] = useState([]);
+    const [showIcon,setShowIcon] = useState(false)
     const getBlog = async()=>{
     let { data: blogs, error } = await supabase
       .from('blogs')
@@ -22,13 +25,33 @@ const SelectedBlog = () =>{
       .maybeSingle()
     // console.log(blogs)
     setSelected(blogs)
+    const { data: { user } } = await supabase.auth.getUser()
+    if (blogs?.username === user?.email?.split('@')[0]) {
+        setShowIcon(true)
+    }else{
+        setShowIcon(false)
+    }
     }
     useEffect(()=>{
         getBlog()
     },[])
 
+    const deleteBlog = async () => {
+        try{
+            const { error } = await supabase
+            .from('blogs')
+            .delete()
+            .eq('id', id)
+            navigate('/')
+        }catch(error){
+            console.log(error)
+            alert("Something went wrong!")
+        }
+    }
+
+
     return(
-        <Blogpage selected={selected}/>
+        <Blogpage selected={selected} show={showIcon} delete={deleteBlog}/>
     )
 }
 
@@ -44,6 +67,7 @@ const Authprovider = ({ children }) => {
     const [isLoading, setIsLoading] = useState(false)
     const [isUploading,setIsUploading] = useState(false)
     const [isSent,setIsSent] = useState(false)
+    const [selected,setSelected] = useState();
 
     const [allBlogs,setAllBlogs] = useState([]);
 
@@ -60,7 +84,7 @@ const Authprovider = ({ children }) => {
         return () => getUserinfo()
     }, [])
 
-    console.log("From authcontext", user)
+    // console.log("From authcontext", user)
 
     const signup = async (e) => {
         e.preventDefault()
@@ -117,7 +141,7 @@ const Authprovider = ({ children }) => {
     const TPsign = async () => {
 
         let { data, error } = await supabase.auth.signInWithOAuth({
-             provider: 'google'
+             provider: 'facebook'
         })
 
         const { data: { user } } = await supabase.auth.getUser()
@@ -130,7 +154,7 @@ const Authprovider = ({ children }) => {
         let { data: blogs, error } = await supabase
         .from('blogs')
         .select('*')
-        // console.log(blogs)
+        console.log(blogs)
         setAllBlogs(blogs?.reverse())
         setIsLoading(false)
         if (error) {
@@ -161,6 +185,72 @@ const Authprovider = ({ children }) => {
     }
   }
 
+  const getBlog = async(id)=>{
+    let { data: blogs, error } = await supabase
+      .from('blogs')
+      .select('*')
+      .eq('id',id)
+      .maybeSingle()
+    // console.log(blogs)
+    setSelected(blogs)
+    }
+
+  const editContent = async (e) => {
+    e.preventDefault()
+    try {    
+        console.log(e.target.id.value)
+        console.log("Heading",e.target.heading.value)
+        console.log("content",e.target.content.value)
+        console.log("tags",e.target.tag.value)
+        setIsUploading(true)
+        const { data, error } = await supabase
+        .from('blogs')
+        .update({ heading: e.target.heading.value, content: e.target.content.value, tags: e.target.tag.value })
+        .eq('id', e.target.id.value)
+        .select()
+        setIsUploading(false)
+        if (data) {
+            console.log(data)
+            navigate('/')
+        }
+    } catch (error) {
+        console.log(error)
+        alert("Something went wrong! Try again later")
+    }
+}
+
+    // const [reactions,setReaction] = useState();
+
+    // const getReact = async (id) =>{
+    //     try {
+    //         let { data: blogs, error } = await supabase
+    //         .from('blogs')
+    //         .select('reactions')
+    //         .eq('id',id)
+    //         .maybeSingle()
+    //         // console.log(blogs?.reactions)
+    //     //   setReaction(blogs?.reactions)
+    //     } catch (error) {
+            
+    //     }
+    // }
+
+
+    // const reactPost = async(id,no) =>{
+    //     setReaction(no)
+    //     const { data, error } = await supabase
+    //     .from('blogs')
+    //     .update(
+    //       { reactions: no},
+    //     )
+    //     .eq('id',id)
+    //     .select()
+    // }
+
+    // useEffect(()=>{
+    //     getReact()
+    // },[reactions])
+
 
     let values = {
         signup: signup,
@@ -175,7 +265,10 @@ const Authprovider = ({ children }) => {
         allBlogs:allBlogs,
         getContent:getContent,
         postBlog:postBlog,
-        isUploading:isUploading
+        isUploading:isUploading,
+        getBlog:getBlog,
+        editContent:editContent,
+        selected:selected,
     }
 
     return (

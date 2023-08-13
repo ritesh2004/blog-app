@@ -45,6 +45,17 @@
     margin-bottom: 20px;
     margin-top: 20px;
 }
+.feed-desktop-con .group1 .reaction-com{
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 8px;
+    color: #FFF;
+}
+.feed-desktop-con .group1 .reaction-com span{
+    font-size: large;
+    color: #FFF;
+    font-family: Lexend Deca;
+}
 .feed-desktop-con .group3{
     width: 73px;
     height: 200px;

@@ -37,6 +37,16 @@
     align-items: center;
     margin-top: 50px;
 }
+.reaction-com{
+    display: flex;
+    flex-direction: row-reverse;
+    color: white;
+    gap: 8px;
+}
+.reaction-com span{
+    font-size: large;
+    font-family: Lexend Deca;
+}
 
 
 @media screen and (max-width: 1210px) {

@@ -6,6 +6,7 @@ import Footer from "../components/Footer";
 import Authcontext from "../context/Authcontext";
 import { useNavigate } from "react-router-dom";
 import CircularProgress from '@mui/material/CircularProgress';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
 
 
@@ -21,6 +22,7 @@ const Home = () => {
         getContent()
         setIsLoading(false)
     },[])
+    
     return (
         <>
         <div className="home">
@@ -74,9 +76,11 @@ const Home = () => {
                         }
                     }
                     return(
+                        <div>
                         <div onClick={()=>navigate(`page/${content.id}/`)}>
                         {isLoading?<CircularProgress color="success"/>:<span></span>}
                         <Group
+                            id = {content.id}
                             username = {content.username}
                             heading = {content.heading}
                             content = {content.content?.slice(0,400)}
@@ -84,6 +88,12 @@ const Home = () => {
                             monthname = {monthName}
                             tags = {content.tags}
                         />
+                        </div>
+                        <div className="reaction-com">
+                            {/* {setReaction(reactions+1)} */}
+                            {/* <span>{content.reactions}</span> */}
+                            <FavoriteIcon sx={{color:'red',cursor:'pointer'}}/>
+                        </div>
                         </div>
                     )
                 })}

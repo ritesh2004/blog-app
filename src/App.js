@@ -7,6 +7,7 @@ import Blogpage from './pages/Blogpage';
 import Createpage from './pages/Createpage';
 import { Authprovider, SelectedBlog } from './context/Authcontext';
 import Privateroute from './utils/Privateroute';
+import Editpage from './pages/Editpage';
 
 // Database Password = XAkXXPhaUMVkDrpI
 
@@ -22,6 +23,7 @@ function App() {
       {/* <Route Component={Privateroute}> */}
         <Route path='/page/:id/' element={<Privateroute Component={SelectedBlog}/>}/>
         <Route path='/create' element={<Privateroute Component={Createpage}/>}/>
+        <Route path='/edit/:id/' element={<Privateroute Component={Editpage}/>}/>
       {/* </Route> */}
     </Routes>
     </Authprovider>
